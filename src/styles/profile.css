@@ -1,0 +1,83 @@
+.profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.profile-title {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--cream);
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.avatar-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--berry);
+}
+.upload-btn {
+  background: var(--berry);
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: white;
+  display: inline-block;
+}
+.upload-btn:hover {
+  background: var(--berry-bright);
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+}
+.form-group input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 0.8rem;
+  color: var(--cream);
+  font-family: var(--serif);
+}
+button[type="submit"] {
+  background: var(--berry-bright);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 40px;
+  color: white;
+  font-family: var(--mono);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover {
+  background: var(--berry);
+}
+.profile-message {
+  text-align: center;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}

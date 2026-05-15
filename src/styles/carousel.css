@@ -1,0 +1,720 @@
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:           #1a0d1e;
+  --bg2:          #120a15;
+  --surface:      #2a1130;
+  --surface2:     #3a1845;
+  --berry:        #8b1a4a;
+  --berry-bright: #c0245e;
+  --cream:        #f2ead8;
+  --cream-dim:    #c4b99a;
+  --ink:          #0d0610;
+  --accent:       #e8c86a;
+  --mono:         'DM Mono', monospace;
+  --serif:        'Cormorant Garamond', Georgia, serif;
+  --display:      'Playfair Display', Georgia, serif;
+  --radius:       100px;
+}
+
+/* ─── RESET / BASE (keeps your existing global feel) ─────── */
+.carousel-section {
+  padding: 2rem 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ────────── NEW HORIZONTAL CAROUSEL (BOOK SHELF) ────────── */
+.carousel-viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* base card – each card takes equal space (8 cards on desktop) */
+.c-card {
+  flex: 0 0 calc((100% - 12px * 7) / 8);
+  min-width: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex-basis 0.4s, box-shadow 0.4s, border 0.2s;
+  border: 2px solid transparent;
+}
+
+/* active card: wider (shows full info) */
+.c-card.active {
+  flex: 0 0 280px;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 4px rgba(107, 16, 64, 0.5), 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.c-card-inner {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.c-card-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.c-card-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  z-index: 0;
+}
+
+.c-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+  z-index: 1;
+}
+
+/* spine – shown on inactive cards */
+.c-card-spine {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.c-card-spine-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--display);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 180px;
+}
+
+.c-card.active .c-card-spine {
+  display: none;
+}
+
+/* body – full info, only on active card */
+.c-card-body {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem;
+  display: none;
+}
+
+.c-card.active .c-card-body {
+  display: block;
+}
+
+.c-card-genre {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 0.3rem;
+}
+
+.c-card-title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.c-card-author {
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.65rem;
+}
+
+.c-card-btn {
+  display: inline-block;
+  padding: 0.32rem 0.9rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.c-card-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* dots (carousel indicators) */
+.carousel-dots {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin: 1rem 0 0;
+}
+
+.cdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.cdot.active {
+  width: 20px;
+  border-radius: 3px;
+  background: var(--cream);
+}
+
+/* ─── RESPONSIVE (small screens) ────────────────────────── */
+@media (max-width: 640px) {
+  .c-card {
+    flex: 0 0 calc((100% - 12px * 4) / 5);
+  }
+  .c-card.active {
+    flex: 0 0 200px;
+  }
+  .c-card-inner {
+    height: 180px;
+  }
+  .c-card-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* ─── CONTROLS ROW (kept exactly as you had) ────────────── */
+.sc-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 700px;
+  margin-top: 32px;
+  padding: 0;
+  gap: 12px;
+}
+
+.sc-ctrl-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--cream);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 11px 20px;
+  border-radius: var(--radius);
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex: 1;
+  text-align: center;
+}
+
+.sc-ctrl-btn:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* Clicker – center, fixed width */
+.sc-clicker-wrap {
+  flex-shrink: 0;
+}
+
+.sc-clicker {
+  position: relative;
+  overflow: hidden;
+  background: var(--berry);
+  color: var(--cream);
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 8px 32px rgba(139,26,74,0.4);
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.sc-clicker {
+  position: relative;
+  left: 25px;   /* ← adjust this value (positive = right) */
+  /* rest of properties unchanged */
+}
+
+.sc-clicker:hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 12px 40px rgba(192,36,94,0.5);
+}
+
+.sc-clicker:active { transform: scale(0.93); }
+
+.sc-clicker-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.sc-clicker-arrow {
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+/* ripple effect (optional) */
+.sc-ripple {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: scRipple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes scRipple {
+  to { transform: translate(-50%, -50%) scale(30); opacity: 0; }
+}
+
+/* ─── MODAL (dark, literary, easy on the eyes) ───────────── */
+.story-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 4, 14, 0.96);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.25s ease;
+}
+
+.story-modal {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  background: #1a121f;        /* deep warm dark */
+  color: #ece4d7;             /* soft parchment */
+  border-radius: 16px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.story-modal-content {
+  overflow-y: auto;
+  padding: 2.5rem 2.5rem 3rem;
+  scrollbar-width: thin;
+  scrollbar-color: #c49a6c #2a1f2a;
+}
+
+.story-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.story-modal-content::-webkit-scrollbar-track {
+  background: #2a1f2a;
+  border-radius: 4px;
+}
+.story-modal-content::-webkit-scrollbar-thumb {
+  background: #c49a6c;
+  border-radius: 4px;
+}
+
+.modal-title {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f5ede0;
+  letter-spacing: -0.01em;
+  border-left: 4px solid var(--berry-bright);
+  padding-left: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.modal-author {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #b8a99a;
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+.modal-story-body {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #e2d9ce;
+}
+
+.modal-story-body p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.modal-story-body p:first-of-type {
+  text-indent: 0;
+}
+
+.modal-story-body p:first-of-type::first-letter {
+  font-size: 3.2em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.4rem;
+  color: var(--berry-bright);
+  font-family: var(--display);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 300;
+  cursor: pointer;
+  color: #b8a99a;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  background: var(--berry-bright);
+  color: white;
+  transform: scale(1.05);
+}
+
+.modal-loading {
+  text-align: center;
+  padding: 3rem;
+  font-family: var(--mono);
+  color: #b8a99a;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .story-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+  .story-modal-content {
+    padding: 1.5rem;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  .modal-story-body {
+    font-size: 0.95rem;
+  }
+}
+/* ────────── HORIZONTAL CAROUSEL – 5 VISIBLE CARDS ────────── */
+
+/* On desktop: 5 cards visible (4 gaps) */
+.c-card {
+  flex: 0 0 calc((100% - 12px * 4) / 5);   /* 5 cards, 4 gaps */
+  min-width: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex-basis 0.4s, box-shadow 0.4s, border 0.2s;
+  border: 2px solid transparent;
+}
+
+/* Active card expands to 280px (wider) */
+.c-card.active {
+  flex: 0 0 280px;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 4px rgba(107, 16, 64, 0.5), 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the track gap remains 12px */
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Responsive: on tablets between 640px and 1024px, show 4 cards */
+@media (max-width: 1024px) and (min-width: 641px) {
+  .c-card {
+    flex: 0 0 calc((100% - 12px * 3) / 4);   /* 4 cards, 3 gaps */
+  }
+  .c-card.active {
+    flex: 0 0 260px;
+  }
+}
+
+/* Mobile: 3 cards visible */
+@media (max-width: 640px) {
+  .c-card {
+    flex: 0 0 calc((100% - 12px * 2) / 3);   /* 3 cards, 2 gaps */
+  }
+  .c-card.active {
+    flex: 0 0 200px;
+  }
+  .c-card-inner {
+    height: 180px;
+  }
+  .c-card-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Inactive card title – horizontal, readable */
+.c-card-inactive-title {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  padding: 0 8px;
+}
+
+.c-card-inactive-title-text {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  display: inline-block;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 24px;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Mobile controls: center the clicker, allow buttons to wrap but keep clicker centered */
+@media (max-width: 640px) {
+  .sc-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  /* Make "Browse the Library" and "Find by Mood" equal width, sit on sides */
+  .sc-ctrl-btn {
+    flex: 1 1 auto;
+    min-width: 110px;
+    font-size: 9px;
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+
+  /* Clicker wrap stays centered, not stretched */
+  .sc-clicker-wrap {
+    order: 0; /* keep clicker in middle */
+    flex-shrink: 0;
+  }
+
+  /* Ensure clicker itself doesn't overflow */
+  .sc-clicker {
+    padding: 12px 24px;
+  }
+}
+@media (max-width: 640px) {
+  .sc-controls {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .sc-ctrl-btn:first-child {
+    justify-self: start;
+  }
+  .sc-clicker-wrap {
+    justify-self: center;
+  }
+  .sc-ctrl-btn:last-child {
+    justify-self: end;
+  }
+}
+@media (max-width: 640px) {
+  .carousel-section {
+    padding: 1rem 0.5rem 0;
+  }
+
+  /* Show 3 cards on mobile, active card still larger */
+  .c-card {
+    flex: 0 0 calc((100% - 12px * 2) / 3); /* 3 cards, 2 gaps */
+  }
+  .c-card.active {
+    flex: 0 0 200px;
+  }
+  .c-card-inner {
+    height: 160px;
+  }
+
+  /* Inactive title text smaller */
+  .c-card-inactive-title-text {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    white-space: normal;
+    max-width: 85%;
+    line-height: 1.2;
+  }
+
+  /* Active card body text smaller */
+  .c-card-body {
+    padding: 0.6rem;
+  }
+  .c-card-title {
+    font-size: 1rem;
+  }
+  .c-card-author {
+    font-size: 0.6rem;
+  }
+  .c-card-btn {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 640px) {
+  .carousel-dots {
+    margin-top: 0.8rem;
+    gap: 6px;
+  }
+  .cdot {
+    width: 5px;
+    height: 5px;
+  }
+  .cdot.active {
+    width: 16px;
+  }
+}
+.sc-ctrl-btn {
+  white-space: nowrap;      /* prevent text from wrapping */
+  overflow: visible;        /* or hidden, but nowrap is enough */
+  min-width: 120px;         /* give it some breathing room */
+  text-align: center;
+}
+
+/* On mobile, reduce min-width slightly */
+@media (max-width: 640px) {
+  .sc-ctrl-btn {
+    min-width: 90px;
+    font-size: 8px;
+    padding: 8px 8px;
+  }
+}
+@media (max-width: 640px) {
+  .sc-clicker {
+    position: relative;
+    left: 1px;   /* ← change this number: + = right, - = left */
+  }
+}
+
+.carousel-viewport {
+  touch-action: pan-y;      /* allow vertical scroll, block horizontal pan */
+  cursor: grab;
+}
+.carousel-viewport:active {
+  cursor: grabbing;
+}
+
+.carousel-viewport {
+  touch-action: pan-y;  /* allows vertical scroll but enables horizontal drag detection */
+  cursor: grab;
+  user-select: none;
+}
+.carousel-viewport:active {
+  cursor: grabbing;
+}
+.sc-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 32px auto 0;
+  gap: 1rem;
+}
+
+@media (max-width: 560px) {
+  .sc-ctrl-btn {
+    font-size: 0.7rem;
+    padding: 8px 10px;
+    min-width: 0;
+    white-space: normal;      /* allow text to wrap */
+    word-break: keep-all;     /* prevent breaking inside words */
+    line-height: 1.2;
+  }
+}
+.sc-ctrl-btn:first-child {
+  justify-self: start;
+}
+.sc-clicker-wrap {
+  justify-self: center;
+}
+.sc-ctrl-btn:last-child {
+  justify-self: end;
+}

@@ -1,0 +1,341 @@
+/* ─── TONIGHT'S PICK ─────────────────────────────────────── */
+.tonights-section {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;               /* default small padding */
+}
+
+.tonights-card {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tonights-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tonights-cover {
+  width: 140px;
+  flex-shrink: 0;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+}
+
+.tonights-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.tonights-genre-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.9);
+  z-index: 1;
+}
+
+.tonights-info {
+  flex: 1;
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tonights-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--berry-bright);
+  text-transform: uppercase;
+}
+
+.tonights-title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cream);
+  margin: 0;
+}
+
+.tonights-author {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cream-dim);
+}
+
+.tonights-quote {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  font-style: italic;
+  margin: 0;
+  border-left: 2px solid var(--berry-bright);
+  padding-left: 0.8rem;
+}
+
+.tonights-read-btn {
+  align-self: flex-start;
+  background: var(--berry);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.25rem;
+}
+
+.tonights-read-btn:hover {
+  background: var(--berry-bright);
+}
+
+.tonights-loading {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cream-dim);
+  padding: 2rem;
+}
+
+/* ─── MOBILE FIXES (push title inward) ───────────────────── */
+@media (max-width: 560px) {
+  .tonights-section {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+
+  .tonights-card {
+    flex-direction: column;
+  }
+
+  .tonights-cover {
+    width: 100%;
+    height: 180px;
+  }
+
+  .tonights-info {
+    padding: 1rem !important;          /* give inner text room */
+  }
+
+  .tonights-title,
+  .tonights-author,
+  .tonights-quote,
+  .tonights-label {
+    margin-left: 0.5rem !important;   /* shift text right from edge */
+  }
+}
+
+/* Button text overlap fix (already in carousel.css, but safe to repeat) */
+.sc-ctrl-btn {
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .sc-ctrl-btn {
+    min-width: 90px;
+    font-size: 8px;
+    padding: 8px 12px;
+  }
+}
+/* ─── TONIGHT'S PICK – interactive card with cover ─── */
+.tonights-section {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.tonights-card {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tonights-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tonights-cover {
+  width: 140px;
+  flex-shrink: 0;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+}
+
+.tonights-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.tonights-genre-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.9);
+  z-index: 1;
+}
+
+.tonights-info {
+  flex: 1;
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tonights-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--berry-bright);
+  text-transform: uppercase;
+}
+
+.tonights-title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cream);
+  margin: 0;
+}
+
+.tonights-author {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cream-dim);
+}
+
+.tonights-quote {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  font-style: italic;
+  margin: 0;
+  border-left: 2px solid var(--berry-bright);
+  padding-left: 0.8rem;
+}
+
+.tonights-read-btn {
+  align-self: flex-start;
+  background: var(--berry);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.25rem;
+}
+
+.tonights-read-btn:hover {
+  background: var(--berry-bright);
+}
+
+.tonights-loading {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cream-dim);
+  padding: 2rem;
+}
+
+@media (max-width: 560px) {
+  .tonights-section {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  .tonights-card {
+    flex-direction: column;
+  }
+  .tonights-cover {
+    width: 100%;
+    height: 180px;
+  }
+  .tonights-info {
+    padding: 1rem !important;
+  }
+  .tonights-title,
+  .tonights-author,
+  .tonights-quote,
+  .tonights-label {
+    margin-left: 0.75rem !important;
+    padding-left: 0.5rem !important;   /* ← force extra shift */
+  }
+}
+  .tonights-info {
+    padding-left: 1rem !important;
+  }
+  @media (max-width: 560px) {
+  .tonights-section {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  .tonights-card {
+    flex-direction: column;
+  }
+  .tonights-cover {
+    width: 100%;
+    height: 180px;
+  }
+  .tonights-info {
+    padding: 1rem !important;
+  }
+  .tonights-title,
+  .tonights-quote,
+  .tonights-label {
+    margin-left: 0.75rem !important;
+  }
+  /* Force author name to shift right */
+  .tonights-author {
+    margin-left: 0.75rem !important;
+  }
+}

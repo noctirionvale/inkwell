@@ -1,0 +1,159 @@
+/* ─── GENRE STRIP ────────────────────────────────────────── */
+.genre-section {
+  padding: 32px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+}
+.genre-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--berry);
+  border-bottom: 1px solid var(--berry);
+  background: rgba(139,26,74,0.15);
+  padding: 12px 0;
+}
+.genre-marquee {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.genre-marquee:hover { animation-play-state: paused; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.genre-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.genre-pill:hover { color: var(--cream); }
+.btn-genre {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--cream);
+  background: var(--berry);
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+.btn-genre:hover { background: var(--berry-bright); }
+
+/* ─── TONIGHT'S PICK ─────────────────────────────────────── */
+.tonights-section {
+  position: relative;
+  min-height: 520px;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 24px;
+}
+.stars-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: 0.15; }
+  to   { opacity: 0.85; }
+}
+.tonights-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.tonights-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--cream-dim);
+  opacity: 0.5;
+}
+.tonights-genre {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  background: rgba(139,26,74,0.4);
+  border: 1px solid var(--berry);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.tonights-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--cream);
+}
+.tonights-byline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--cream-dim);
+  opacity: 0.6;
+}
+.tonights-quote {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  font-style: italic;
+  border-left: 2px solid var(--berry-bright);
+  padding-left: 20px;
+  text-align: left;
+}
+.btn-tonight {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  background: var(--cream);
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-tonight:hover { background: var(--accent); transform: translateY(-2px); }
+
+/* ─── MOBILE: Push Tonight's Pick title inward ─── */
+@media (max-width: 640px) {
+  .tonights-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .tonights-title {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    text-align: center;
+  }
+
+  .tonights-quote {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}

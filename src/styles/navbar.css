@@ -1,0 +1,400 @@
+/* ─── NAVBAR ─────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  background: var(--berry);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.navbar-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  background: var(--cream);
+  color: var(--berry);
+  padding: 5px 14px;
+  border-radius: 4px;
+}
+.navbar-center {
+  display: flex;
+  gap: 18px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(242,234,216,0.65);
+}
+.navbar-tag { white-space: nowrap; }
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(255,255,255,0.2); }
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--cream);
+  border-radius: 2px;
+}
+.navbar-right { position: relative; }
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+}
+.dropdown-email {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cream-dim);
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 8px;
+}
+.dropdown button {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cream);
+  letter-spacing: 0.1em;
+  text-align: left;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.dropdown button:hover { opacity: 1; }
+
+/* ─── HERO HEADER ────────────────────────────────────────── */
+.hero-header {
+  text-align: center;
+  padding: 56px 24px 32px;
+  position: relative;
+}
+.hero-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--berry-bright));
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(38px, 7vw, 76px);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  line-height: 1.9;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .navbar-center { display: none; }
+}
+.navbar-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  background: var(--cream);
+  color: var(--berry);
+  padding: 5px 14px;
+  border-radius: 4px;
+  /* ADD THESE TWO: */
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+/* ADD THIS NEW RULE: */
+.navbar-logo:hover {
+  background: var(--accent);
+  transform: scale(1.04);
+}
+/* ─── MOBILE FIXES ───────────────────────────────────────── */
+
+/* Navbar logo as button — match existing pill style */
+.navbar-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  background: var(--cream);
+  color: var(--berry);
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  font-weight: 700;
+}
+.navbar-logo:hover {
+  background: var(--accent);
+  transform: scale(1.03);
+}
+.navbar-logo:active {
+  transform: scale(0.97);
+}
+
+/* ── Modal mobile fixes ── */
+@media (max-width: 640px) {
+  .story-modal-overlay {
+    padding: 0;
+    align-items: flex-end;   /* sheet slides up from bottom on mobile */
+  }
+
+  .story-modal {
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;  /* rounded top only */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .story-modal-content {
+    padding: 32px 20px 40px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .modal-story-body {
+    font-size: 15px;
+  }
+
+  /* Drag handle indicator */
+  .story-modal::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    margin: 12px auto 0;
+    flex-shrink: 0;
+  }
+}
+
+/* ── Hero header mobile centering ── */
+@media (max-width: 600px) {
+  .hero-header {
+    padding: 40px 20px 24px;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 10vw, 56px);
+    text-align: center;
+  }
+
+  .hero-eyebrow,
+  .hero-sub {
+    text-align: center;
+  }
+
+  /* Carousel controls equal spacing */
+  .sc-controls {
+    padding: 16px 16px 0;
+    justify-content: space-between;
+  }
+
+  .sc-ctrl-btn {
+    font-size: 9px;
+    padding: 10px 10px;
+    text-align: center;
+    flex: 1;
+  }
+
+  .sc-clicker-wrap {
+    flex-shrink: 0;
+  }
+
+  /* Tonight's pick card mobile */
+  .tonights-section {
+    padding: 0 0.75rem;
+  }
+
+  .tonights-info {
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  /* Genre strip centering */
+  .genre-section {
+    padding: 24px 0 32px;
+  }
+
+  .btn-genre {
+    font-size: 9px;
+    padding: 10px 20px;
+  }
+}
+
+/* ── General mobile overflow guard ── */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  /* Prevent modal content overflow */
+  .story-modal-content * {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Ensure navbar uses flex row with equal spacing */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  background: var(--berry);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.navbar-left {
+  flex: 1;
+  text-align: left;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 1;
+}
+
+/* If you have a language switcher, ensure it’s inside .navbar-right */
+.lang-wrap {
+  display: inline-flex;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .navbar-center {
+    display: none;
+  }
+  .navbar-left {
+    flex: auto;
+  }
+  .navbar-right {
+    flex: auto;
+  }
+}
+
+.navbar-tag {
+  color: rgba(242,234,216,0.65);  /* or whatever your cream-dim is */
+  transition: color 0.2s;
+}
+.navbar-tag:hover {
+  color: var(--cream);
+}
+
+/* Mobile menu (slide from right) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  background: var(--surface);
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-menu.open {
+  right: 0;
+}
+.mobile-menu-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--cream);
+  cursor: pointer;
+}
+.mobile-menu a,
+.mobile-menu span,
+.mobile-menu button {
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-menu button {
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.navbar-logo-icon {
+  height: 24px;
+  width: auto;
+  border-radius: 4px;
+}
+
+.dropdown-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
