@@ -125,24 +125,22 @@ export default function StoryCarousel() {
   }, [])
 
   const handleDragEnd = useCallback(() => {
-    if (!isDragging.current) return
-    isDragging.current = false
-    const currentTransform = trackRef.current ? parseFloat(trackRef.current.style.transform.match(/-?[\d.]+/)?.[0] || 0) : 0
-    const delta = startTransform.current - currentTransform
-    const threshold = 80  // less sensitive
-    if (Math.abs(delta) > threshold) {
-      if (delta < -threshold) {
-        // swipe left → next
-        const next = (activeIdx + 1) % stories.length
-        setActiveIdx(next)
-      } else if (delta > threshold) {
-        // swipe right → previous
-        const prev = (activeIdx - 1 + stories.length) % stories.length
-        setActiveIdx(prev)
-      }
+  if (!isDragging.current) return;
+  isDragging.current = false;
+  const currentTransform = trackRef.current ? parseFloat(trackRef.current.style.transform.match(/-?[\d.]+/)?.[0] || 0) : 0;
+  const delta = startTransform.current - currentTransform;
+  const threshold = 120; // ← increase this value for less sensitivity
+  if (Math.abs(delta) > threshold) {
+    if (delta < -threshold) {
+      const next = (activeIdx + 1) % stories.length;
+      setActiveIdx(next);
+    } else if (delta > threshold) {
+      const prev = (activeIdx - 1 + stories.length) % stories.length;
+      setActiveIdx(prev);
     }
-    scrollToActive()
-  }, [activeIdx, stories.length, scrollToActive])
+  }
+  scrollToActive();
+}, [activeIdx, stories.length, scrollToActive]);
 
   useEffect(() => {
     const viewport = viewportRef.current
@@ -212,12 +210,11 @@ export default function StoryCarousel() {
 
               return (
                 <div
-                  key={story.id}
-                  className={`c-card${isActive ? ' active' : ''}${isDone ? ' done' : ''}`}
-                  onClick={() => handleCardClick(story, idx)}
-                  title={story.title}
-                >
-                  <div className="c-card-inner">
+  key={story.id}
+  className={`c-card${isActive ? ' active' : ''}${isDone ? ' done' : ''}`}
+  onClick={() => !isActive && setActiveIdx(idx)}   // only expand
+>
+                  <div className="c-card-inner" onClick={(e) => { e.stopPropagation(); handleReadStory(story); }}>
                     <div className="c-card-bg" style={{ background: bgColor }} />
                     {coverUrl && <div className="c-card-bg-image" style={{ backgroundImage: `url(${coverUrl})` }} />}
                     <div className="c-card-overlay" />

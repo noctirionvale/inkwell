@@ -398,3 +398,18 @@
   object-fit: cover;
   margin-bottom: 0.5rem;
 }
+
+/* Hide hamburger on desktop */
+.hamburger {
+  display: none;
+}
+
+/* Mobile: show hamburger, hide some desktop links if needed */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .navbar-center {
+    display: none;  /* hide desktop nav links on mobile */
+  }
+}
